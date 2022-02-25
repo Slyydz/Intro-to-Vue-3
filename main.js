@@ -15,9 +15,10 @@ const app = Vue.createApp({
     },
     methods: {
         addToCart() {
-            this.cart += 1
+                this.cart += 1
         },
         updateImage(variantImage) {
+<<<<<<< HEAD
             this.image = variantImage
         },
         updateStock(variantQuantity){
@@ -36,6 +37,9 @@ const app = Vue.createApp({
     computed: {
         title() {
             return this.brand + ' ' + this.product;
+=======
+            this.image = variantImage;
+>>>>>>> master
         }
     }
 })
