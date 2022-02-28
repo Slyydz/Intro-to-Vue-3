@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
+<<<<<<< HEAD
             cart: [],
             premium: true
         }
@@ -14,3 +15,12 @@ const app = Vue.createApp({
         }
     }
 })
+=======
+            cart: 0,
+            premium: false
+        }
+    },
+    methods: {
+        }
+    })
+>>>>>>> master
