@@ -1,13 +1,13 @@
 app.component('product-display', {
-    props: {
-        premium: {
-            type: Boolean,
-            required: true
-        }
-    },
-    template: 
-    /*html*/
-    `<div class="product-display">
+  props: {
+    premium: {
+      type: Boolean,
+      required: true
+    }
+  },
+  template: 
+  /*html*/
+  `<div class="product-display">
     <div class="product-container">
       <div class="product-image">
         <img v-bind:src="image">
@@ -31,7 +31,19 @@ app.component('product-display', {
           :style="{ backgroundColor: variant.color }">
         </div>
         
-        <button class="button" :class="{ disabledButton: !inStock }" :disabled="!inStock" v-on:click="addToCart">Add to Cart</button>
+        <button 
+          class="button" 
+          :class="{ disabledButton: !inStock }" 
+          :disabled="!inStock" 
+          v-on:click="addToCart">
+          Add to Cart
+        </button>
+
+        <button 
+          class="button" 
+          v-on:click="removeFromCart">
+          Remove From Cart
+        </button>
       </div>
     </div>
   </div>`,
@@ -46,32 +58,33 @@ app.component('product-display', {
           { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0 },
         ]
     }
-},
-methods: {
-    addToCart() {
-        this.cart += 1
+  },
+  methods: {
+      addToCart() {
+          this.$emit('add-to-cart', this.variants[this.selectedVariant].id);
+      },
+      removeFromCart() {
+        this.$emit('remove-from-cart');
     },
-    updateVariant(index) {
-        this.selectedVariant = index
-    }
-},
-computed: {
-    title() {
-        return this.brand + ' ' + this.product
-    },
-    image() {
-        return this.variants[this.selectedVariant].image
-    },
-    inStock() {
-        return this.variants[this.selectedVariant].image
-    },
-    shipping() {
-        if(this.premium){
-            return 'Free'
+      updateVariant(index) {
+          this.selectedVariant = index
+      }
+  },
+  computed: {
+      title() {
+          return this.brand + ' ' + this.product
+      },
+      image() {
+          return this.variants[this.selectedVariant].image
+      },
+      inStock() {
+          return this.variants[this.selectedVariant].quantity
+      },
+      shipping() {
+        if (this.premium) {
+          return 'Free'
         }
-        else {
-            return 2.99;
-        }
-    }
-} 
+        return 2.99
+      }
+  }
 })
